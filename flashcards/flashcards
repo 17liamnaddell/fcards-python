@@ -121,10 +121,16 @@ if not config['sets'] == sets:
     }''')
 i = 0
 os.chdir(sets)
-
 updated = vctrl.check_version("https://github.com/17liamnaddell/fcards", sets)
-with version = open('VERSION')
+print("DDO:", updated)
 
+with open(sets + "/VERSION") as version:
+    if version == updated:
+        pass
+    else:
+        #os.remove(sets + "/VERSION")
+        f = open(sets + "/VERSION", "w+")
+        f.write(updated)
 for arg in sys.argv:
     
     if arg == "-s":
