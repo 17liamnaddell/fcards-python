@@ -6,8 +6,8 @@ from subprocess import call
 import os
 import readline
 from vctrl import vctrl
+FDIR = os.getcwd()
 
-vctrl.print_hi()
 template = '''
 {
     "flashcards": [
@@ -18,6 +18,7 @@ template = '''
 }
 
 '''
+
 
 home=os.environ['HOME']
 os.chdir(home)
@@ -102,6 +103,7 @@ def findAndSearch():
 
 #test if there is a sets dir and check it against the config file
 #if the sets dir has been moved, search for it. and notify the user
+
 try:
     open(sets)
 except FileNotFoundError:
@@ -118,6 +120,11 @@ if not config['sets'] == sets:
     "sets": "''' + sets + '''"
     }''')
 i = 0
+os.chdir(sets)
+
+updated = vctrl.check_version("https://github.com/17liamnaddell/fcards", sets)
+with version = open('VERSION')
+
 for arg in sys.argv:
     
     if arg == "-s":
