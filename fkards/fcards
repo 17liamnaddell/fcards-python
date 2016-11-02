@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+from subprocess import call
+import os
+import readline
+from vctrl import vctrl
+
+vctrl.print_hi()
+template = '''
+{
+    "flashcards": [
+        {
+            "hi": "test1"
+        }
+    ]
+}
+
+'''
+
+home=os.environ['HOME']
+os.chdir(home)
+try:
+    kfg = open(home + '/.fconfig.json')
+except FileNotFoundError:
+    os.chdir(home)
+    newconfig = open(".fconfig.json", 'w+')
+    newconfig.write(
+'''{
+    "sets": "/home/error/sets"
+}''')
+cfg = open(home + '/.fconfig.json')
+config=json.load(cfg)
+sets=config['sets']
+
+def createSet(name):
+    os.chdir(sets)
+    f = 0
+    if name.endswith('.json'):
+        f = open(name, 'w+')
+        f.write(template)
+        f.close()
+        call(['vim', name])
+    else:
+        f = open(name + '.json', 'w+')
+        f.write(template)
+        f.close()
+        call(['vim', name + '.json'])   
+
+FILES=[]
+
+def deleteSet():
+    os.chdir(sets)
+    readline.parse_and_bind("tab: complete")
+    readline.set_completer(complete)
+    openme=input("what file do you want to delete(type none to delete nothing):")
+    if not openme.endswith('.json'):
+        openme = openme + '.json'
+    if not openme == 'none':
+        call(['rm', openme])
+    else:
+        sys.exit()
+
+def complete(text, state):
+    FILES=os.listdir()
+    for cmd in FILES:
+        if cmd.startswith(text):
+            if not state:
+                return cmd
+            else:
+                state -= 1
+def startFlashcards():
+    os.chdir(sets)
+    readline.parse_and_bind("tab: complete")
+    readline.set_completer(complete)
+    openme=input("what file do you want to open:")
+    if not openme.endswith('.json'):
+        openme = openme+'.json'
+    with open(openme) as myset:
+        data = json.load(myset)
+        fc = data["flashcards"]
+        for card in fc: 
+            for key in card:
+                answer = input(key + ":\n")
+                if answer == card[key]:
+                    print("good job")
+                else:
+                    print("wrong, the answer was:" + card[key] + "your answer:" + answer)
+AllSets = []
+def findAndSearch():
+    for root, subFolders, files in os.walk(home):
+        if "sets" in root:
+            AllSets.append(root)
+    readline.parse_and_bind("tab: complete")
+    readline.set_completer(complete)
+    for Set in AllSets:
+        print(Set)
+    global sets
+    sets = input("what is your sets directory(it can only be in home or and subdirectory of home), if you have no sets file, run \"mkdir ~/sets\" ")
+
+
+#test if there is a sets dir and check it against the config file
+#if the sets dir has been moved, search for it. and notify the user
+try:
+    open(sets)
+except FileNotFoundError:
+    findAndSearch()
+except IsADirectoryError:
+    setsIsNormal=True
+#get all args besides how the file is run, and allow them to be compared
+if not config['sets'] == sets:
+    os.remove(home + '/.fconfig.json')
+    os.chdir(home)
+    newconfig = open(".fconfig.json", 'w+')
+    newconfig.write('''        
+    {
+    "sets": "''' + sets + '''"
+    }''')
+i = 0
+for arg in sys.argv:
+    
+    if arg == "-s":
+        name = sys.argv[i+1]
+        createSet(name)
+    elif arg == "-r":
+        startFlashcards()
+    elif arg == "-d":
+        deleteSet()
+    elif arg == "-l":
+        os.chdir(sets)
+        for filez in os.listdir():
+            print(filez)
+    try:
+        sys.argv[1]
+    except IndexError:
+        print("bad args, to list the sets, use -l, to run the program, enter -r, to create a flashcarrd set, enter -s <name> ")
+        sys.exit()
+    i += 1 
+
