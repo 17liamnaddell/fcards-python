@@ -125,9 +125,11 @@ updated = vctrl.check_version("https://github.com/17liamnaddell/fcards", sets)
 print("DDO:", updated)
 
 with open(sets + "/VERSION") as version:
-    if version == updated:
+    if version.read() == updated:
         pass
     else:
+        version.close()
+        print("updated")
         #os.remove(sets + "/VERSION")
         f = open(sets + "/VERSION", "w+")
         f.write(updated)
