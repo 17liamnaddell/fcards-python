@@ -7,7 +7,7 @@ import os
 import readline
 import Vctrl
 
-vctl = Vctrl.Vctrl()
+Vctl = Vctrl.Verctrl()
 
 FDIR = os.getcwd()
 
@@ -21,7 +21,6 @@ template = '''
 }
 
 '''
-
 
 home=os.environ['HOME']
 os.chdir(home)
@@ -124,7 +123,7 @@ if not config['sets'] == sets:
     }''')
 i = 0
 os.chdir(sets)
-updated = vctl.check_version("https://github.com/17liamnaddell/fcards", sets)
+updated = Vctl.check_version("https://github.com/17liamnaddell/fcards", sets)
 print("DDO:", updated)
 
 with open(sets + "/VERSION") as version:
