@@ -140,7 +140,6 @@ with open(sets + "/VERSION") as version:
         f = open(sets + "/VERSION", "w+")
         f.write(updated)
         os.chdir(sets)
-        #it added the stets to the thingy paramaters
         Vctl.update_and_end(FDIR, sets)
 for arg in sys.argv:
     
