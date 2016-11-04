@@ -24,6 +24,7 @@ template = '''
 
 home=os.environ['HOME']
 os.chdir(home)
+
 try:
     kfg = open(home + '/.fconfig.json')
 except FileNotFoundError:
@@ -33,7 +34,10 @@ except FileNotFoundError:
 '''{
     "sets": "/home/error/sets"
 }''')
+
 cfg = open(home + '/.fconfig.json')
+
+
 config=json.load(cfg)
 sets=config['sets']
 
@@ -122,6 +126,7 @@ if not config['sets'] == sets:
     "sets": "''' + sets + '''"
     }''')
 i = 0
+
 os.chdir(sets)
 updated = Vctl.check_version("https://github.com/17liamnaddell/fcards", sets)
 print("DDO:", updated)
@@ -135,6 +140,8 @@ with open(sets + "/VERSION") as version:
         #os.remove(sets + "/VERSION")
         f = open(sets + "/VERSION", "w+")
         f.write(updated)
+        os.chdir(sets)
+        Vctl.update_and_end(FDIR)
 for arg in sys.argv:
     
     if arg == "-s":
