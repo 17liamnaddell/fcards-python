@@ -141,7 +141,7 @@ with open(sets + "/VERSION") as version:
         f = open(sets + "/VERSION", "w+")
         f.write(updated)
         os.chdir(sets)
-        Vctl.update_and_end(FDIR)
+        Vctl.update_and_end(FDIR, sets)
 for arg in sys.argv:
     
     if arg == "-s":
