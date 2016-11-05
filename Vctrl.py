@@ -20,5 +20,5 @@ class Verctrl:
         os.chdir("..")
         return var
     def update_and_end(self, FDIR, sets):
-        call(["rm", "-rf", FDIR+"/flashcards"])
+        call(["rm", "-f", "usr/sbin/flashcards"])
         call(["cp", "-rf", sets + "/fcards-python/fcards", FDIR + "/flashcards"])
