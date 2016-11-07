@@ -90,7 +90,7 @@ def startFlashcards():
             for key in card:
                 answer = input(c.m+key + ":\n")
                 if answer == card[key]:
-                    print(c.g"good job")
+                    print(c.g+"good job")
                 else:
                     print(c.r+"wrong, the answer was:" + card[key] + "your answer:" + answer)
 AllSets = []
