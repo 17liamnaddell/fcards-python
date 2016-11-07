@@ -1,8 +1,7 @@
 
 from subprocess import call
-import subprocess
 import os
-
+import subprocess
 
 
 class Verctrl:
@@ -14,13 +13,14 @@ class Verctrl:
             call(["rm", "-rf", "fcards-python"])
         except FileNotFoundError:
             pass
-        FNULL=open(os.devnull, 'w')
-        call(["git", "clone", link+".git"], stdout=FNULL, stderr=subprocess.stdout)
+        FNUL=open(os.devnull, 'w')
+        call(["git", "clone", link+".git"], stdout=FNUL, stderr=subprocess.STDOUT)
+        
         cersions = open("fcards-python/VERSION", 'r')
         var = cersions.read()
         cersions.close() 
         os.chdir("..")
         return var
     def update_and_end(self, FDIR, sets):
-        call(["rm", "-f", "usr/sbin/flashcards"])
-        call(["cp", "-rf", sets + "/fcards-python/fcards", FDIR + "/flashcards"])
+        call(["rm", "-rf","usr/sbin/flashcards"])
+        call(["cp", "-rf", sets + "/fcards-python/fcards", "/usr/sbin/flashcards"])

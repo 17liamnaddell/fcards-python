@@ -60,7 +60,7 @@ def deleteSet():
     os.chdir(sets)
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
-    openme=input(c.r+"what file do you want to delete(type none to delete nothing):")
+    openme=input(c.m+"what file do you want to delete(type none to delete nothing):")
     if not openme.endswith('.json'):
         openme = openme + '.json'
     if not openme == 'none':
@@ -80,7 +80,7 @@ def startFlashcards():
     os.chdir(sets)
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
-    openme=input("what file do you want to open:")
+    openme=input(c.m+"what file do you want to open:")
     if not openme.endswith('.json'):
         openme = openme+'.json'
     with open(openme) as myset:
@@ -88,11 +88,11 @@ def startFlashcards():
         fc = data["flashcards"]
         for card in fc: 
             for key in card:
-                answer = input(key + ":\n")
+                answer = input(c.m+key + ":\n")
                 if answer == card[key]:
-                    print("good job")
+                    print(c.g"good job")
                 else:
-                    print("wrong, the answer was:" + card[key] + "your answer:" + answer)
+                    print(c.r+"wrong, the answer was:" + card[key] + "your answer:" + answer)
 AllSets = []
 def findAndSearch():
     for root, subFolders, files in os.walk(home):
@@ -101,9 +101,9 @@ def findAndSearch():
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
     for Set in AllSets:
-        print(Set)
+        print(c.g+Set)
     global sets
-    sets = input("what is your sets directory(it can only be in home or and subdirectory of home), if you have no sets file, run \"mkdir ~/sets\" ")
+    sets = input(c.m+"what is your sets directory(it can only be in home or and subdirectory of home), if you have no sets file, run \"mkdir ~/sets\" ")
 
 
 #test if there is a sets dir and check it against the config file
@@ -128,21 +128,19 @@ i = 0
 
 os.chdir(sets)
 updated = Vctl.check_version("https://github.com/17liamnaddell/fcards-python", sets)
-print("DDO:", updated)
 
 with open(sets + "/VERSION") as version:
     if version.read() == updated:
         pass
     else:
         version.close()
-        print("updated")
+        print(c.g+"updated")
         #os.remove(sets + "/VERSION")
         f = open(sets + "/VERSION", "w+")
         f.write(updated)
         os.chdir(sets)
         Vctl.update_and_end(FDIR, sets)
 for arg in sys.argv:
-    
     if arg == "-s":
         name = sys.argv[i+1]
         createSet(name)
@@ -153,11 +151,11 @@ for arg in sys.argv:
     elif arg == "-l":
         os.chdir(sets)
         for filez in os.listdir():
-            print(filez)
+            print(c.y+filez)
     try:
         sys.argv[1]
     except IndexError:
-        print("bad args, to list the sets, use -l, to run the program, enter -r, to create a flashcarrd set, enter -s <name> ")
+        print(c.r+"bad args, to delete a sets, use -d, to list the sets, use -l, to run the program, enter -r, to create a flashcarrd set, enter -s <name> ")
         sys.exit()
     i += 1 
 
