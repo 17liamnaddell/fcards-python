@@ -60,7 +60,7 @@ def deleteSet():
     os.chdir(sets)
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
-    openme=input(c.m+"what file do you want to delete(type none to delete nothing):")
+    openme=input(c.m+"what file do you want to delete(type none to delete nothing):"+c.y)
     if not openme.endswith('.json'):
         openme = openme + '.json'
     if not openme == 'none':
@@ -80,7 +80,7 @@ def startFlashcards():
     os.chdir(sets)
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
-    openme=input(c.m+"what file do you want to open:")
+    openme=input(c.m+"what file do you want to open:"+c.y)
     if not openme.endswith('.json'):
         openme = openme+'.json'
     with open(openme) as myset:
@@ -88,7 +88,7 @@ def startFlashcards():
         fc = data["flashcards"]
         for card in fc: 
             for key in card:
-                answer = input(c.m+key + ":\n")
+                answer = input(c.m+key + ":\n"+c.y)
                 if answer == card[key]:
                     print(c.g+"good job")
                 else:
@@ -103,7 +103,7 @@ def findAndSearch():
     for Set in AllSets:
         print(c.g+Set)
     global sets
-    sets = input(c.m+"what is your sets directory(it can only be in home or and subdirectory of home), if you have no sets file, run \"mkdir ~/sets\" ")
+    sets = input(c.m+"what is your sets directory(it can only be in home or and subdirectory of home), if you have no sets file, run \"mkdir ~/sets\" "+c.y)
 
 
 #test if there is a sets dir and check it against the config file
