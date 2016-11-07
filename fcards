@@ -5,6 +5,7 @@ from subprocess import call
 import os
 import readline
 import Vctrl
+import colors as c
 
 Vctl = Vctrl.Verctrl()
 
@@ -59,7 +60,7 @@ def deleteSet():
     os.chdir(sets)
     readline.parse_and_bind("tab: complete")
     readline.set_completer(complete)
-    openme=input("what file do you want to delete(type none to delete nothing):")
+    openme=input(c.r+"what file do you want to delete(type none to delete nothing):")
     if not openme.endswith('.json'):
         openme = openme + '.json'
     if not openme == 'none':
