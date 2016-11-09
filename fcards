@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#wow
 import json
 import sys
 from subprocess import call
@@ -7,6 +6,7 @@ import os
 import readline
 import Vctrl
 import colors as c
+import emoji as e
 
 Vctl = Vctrl.Verctrl()
 
@@ -91,9 +91,9 @@ def startFlashcards():
             for key in card:
                 answer = input(c.m+key + ":\n"+c.y)
                 if answer == card[key]:
-                    print(c.g+"good job")
+                    print(c.g+"Good Job, "+e.blush)
                 else:
-                    print(c.r+"wrong, the answer was:" + card[key] + "your answer:" + answer)
+                    print(c.r+"Wrong "+e.broken_heart+", the answer was:" + card[key] + "your answer:" + answer)
 AllSets = []
 def findAndSearch():
     for root, subFolders, files in os.walk(home):
