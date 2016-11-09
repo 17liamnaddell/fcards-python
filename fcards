@@ -93,7 +93,7 @@ def startFlashcards():
                 if answer == card[key]:
                     print(c.g+"Good Job, "+e.blush)
                 else:
-                    print(c.r+"Wrong "+e.broken_heart+", the answer was:" + card[key] + "your answer:" + answer)
+                    print(c.r+"Wrong "+e.broken_heart+", the answer was:" + card[key] + ". Your answer:" + answer)
 AllSets = []
 def findAndSearch():
     for root, subFolders, files in os.walk(home):
