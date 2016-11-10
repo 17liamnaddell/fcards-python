@@ -25,8 +25,7 @@ begin_msg='''
 '''
 print(begin_msg)
 time.sleep(1)
-print("", flush=True)
-
+print("\033c")
 Vctl = Vctrl.Verctrl()
 
 FDIR = os.getcwd()
