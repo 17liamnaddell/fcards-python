@@ -167,7 +167,7 @@ for arg in sys.argv:
     try:
         sys.argv[1]
     except IndexError:
-        print(c.r+"bad args, to delete a sets, use -d, to list the sets, use -l, to run the program, enter -r, to create a flashcarrd set, enter -s <name> ")
+        print(c.r+"Bad args, to delete a set, use -d, to list the sets, use -l, to run the program, enter -r, to create a flashcard set, enter -s <name> ")
         sys.exit()
     i += 1 
 
