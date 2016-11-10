@@ -7,10 +7,11 @@ import readline
 import Vctrl
 import colors as c
 import emoji as e
-import console
 import time
+import shutil
 
-width, height = console.getTerminalSize()
+width, height = shutil.get_terminal_size()
+
 
 print("your terminal's width/height", width, height)
 
