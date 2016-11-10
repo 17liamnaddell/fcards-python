@@ -5,10 +5,14 @@ from subprocess import call
 import os
 import readline
 import Vctrl
-import time
 import colors as c
 import emoji as e
+import console
+import time
 
+width, height = console.getTerminalSize()
+
+print("your terminal's width/height", width, height)
 
 begin_msg='''
  _____ _     ____  ____  _     ____  ____  ____  ____  ____ 
@@ -19,6 +23,9 @@ begin_msg='''
                                                                      
 '''
 print(begin_msg)
+time.sleep(1)
+print("", flush=True)
+
 Vctl = Vctrl.Verctrl()
 
 FDIR = os.getcwd()
