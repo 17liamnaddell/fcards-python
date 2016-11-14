@@ -13,7 +13,7 @@ width, height = shutil.get_terminal_size()
 
 
 print("your terminal's width/height", width, height)
-
+print("\033c")
 begin_msg='''
  _____ _     ____  ____  _     ____  ____  ____  ____  ____ 
 /    // \   /  _ \/ ___\/ \ /|/   _\/  _ \/  __\/  _ \/ ___\\
