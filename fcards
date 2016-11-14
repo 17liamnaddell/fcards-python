@@ -107,8 +107,9 @@ def startFlashcards():
         fc = data["flashcards"]
         for card in fc: 
             for key in card:
-                answer = input(c.m+key + ":\n"+c.y)
-                answer = answer.strip()
+                bnswer = input(c.m+key + ":\n"+c.y)
+                cnswer = answer.lstrip()
+                answer = cnswer.rstrip()
                 if answer == card[key]:
                     print(c.g+"Good Job, "+e.blush)
                 else:
