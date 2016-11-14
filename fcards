@@ -9,7 +9,6 @@ import colors as c
 import emoji as e
 import time
 import shutil
-
 width, height = shutil.get_terminal_size()
 
 
@@ -23,7 +22,8 @@ begin_msg='''
 \_/   \____/\_/ \|\____/\_/ \|\____/\_/ \|\_/\_\\\\____/\____/
                                                                      
 '''
-print(begin_msg)
+f_begin_msg = begin_msg.center(len(begin_msg), "0")
+print(f_begin_msg)
 time.sleep(1)
 print("\033c")
 Vctl = Vctrl.Verctrl()
