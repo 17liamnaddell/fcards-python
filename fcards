@@ -108,6 +108,7 @@ def startFlashcards():
         for card in fc: 
             for key in card:
                 answer = input(c.m+key + ":\n"+c.y)
+                answer = answer.strip()
                 if answer == card[key]:
                     print(c.g+"Good Job, "+e.blush)
                 else:
